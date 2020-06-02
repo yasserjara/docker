@@ -1,0 +1,40 @@
+version: "3.2"
+services:
+  php:
+    build: './Devilbox_php/'
+    networks:
+      - back
+    volumes:
+      - /Users/yasser/Documents/Web/www/:/var/www/html/
+    container_name: php_cont
+  apache:
+    build: './Apache/'
+    depends_on:
+      - php
+      - database
+    networks:
+      - front
+      - back
+    ports:
+      - "80:80"
+    volumes:
+      - /Users/yasser/Documents/Web/www/:/var/www/html/
+    container_name: apache_cont
+  database:
+    image: mariadb
+    volumes:
+      - /Users/yasser/Documents/Web/DataBases/data:/var/lib/mysql
+      - /Users/yasser/Documents/Web/DataBases/logs:/var/log/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=*1vale2010
+      - MYSQL_DATABASE=code
+      - MYSQL_USER=code
+      - MYSQL_PASSWORD=cade2010
+    ports:
+      - '3306:3306'
+    networks:
+      - back
+    container_name: DB_cont
+networks:
+    front:
+    back:

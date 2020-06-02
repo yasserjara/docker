@@ -1,0 +1,26 @@
+version: "3"
+services:
+  samba:
+           image: dperson/samba
+           restart: always
+           command: '-u "yasser;*1ion.pulsar" -s "media;/media;yes;no"'
+           stdin_open: true
+           tty: true
+           ports:
+                - 139:139
+                - 445:445         
+           volumes:
+                - /mnt/Storage0:/media
+
+  gitlab:
+        image: gitlab/gitlab-ce:latest
+        restart: always
+        ports:
+                - '2220:22'          
+                - 80:80
+                - 443:443                  
+        volumes:
+                - /home/yasser/Gitlab/config:/etc/gitlab
+                - /home/yasser/Gitlab/logs:/var/log/gitlab
+                - /home/yasser/Gitlab/data:/var/opt/gitlab  
+

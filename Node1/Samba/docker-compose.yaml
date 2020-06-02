@@ -1,0 +1,14 @@
+version: "2"
+services:
+        samba:
+                image: dperson/samba
+                restart: unless-stopped
+                command: '-u "yasser;*1ion.pulsar" -s "Data0;/media/Data0;yes;no" -s "Data1;/media/Data1;yes;no"'
+                stdin_open: true
+                tty: true
+                ports:
+                        - 139:139
+                        - 445:445
+                volumes:
+                        - /mnt/Storage0:/media/Data0
+                        - /mnt/Storage1:/media/Data1
