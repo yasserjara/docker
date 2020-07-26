@@ -4,13 +4,12 @@ services:
         image: dubodubonduponey/netatalk:v1
         restart: unless-stopped
         volumes:
-            - /mnt/Storage1/Disk_Time/:/media/timemachine
-            #- /Users/yasser/Documents/Var_Docker/timemachine/Disk:/media/timemachine
+            - /mnt/Storage2/Disk_Time/:/media/timemachine
         environment:
             - USERS=yasser
             - PASSWORDS=*1ion.vale
-            - NAME=Disk_Time
-            - AVAHI_NAME=Disk_Time
+            - NAME=Disk_Time02
+            - AVAHI_NAME=Disk_Time02
         cap_add:
             - NET_BIND_SERVICE
             - CHOWN
@@ -21,6 +20,7 @@ services:
         cap_drop:
             - ALL
         network_mode: host
+        
 ### Terminal de mac ###        
 #defaults write com.apple.systempreferences TMShowUnsupportedNetworkVolumes 1        
 #sudo tmutil setdestination afp://yasser:*1ion.vale@10.10.10.10/Time\ Machine

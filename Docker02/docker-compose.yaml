@@ -1,0 +1,38 @@
+version: "2"
+services:
+        samba:
+                image: dperson/samba
+                restart: unless-stopped
+                command: '-u "yasser;*1ion.pulsar"
+                          -s "Data0;/media/Data0;yes;no"
+                          -s "Data1;/media/Data1;yes;no"
+                          -s "Data2;/media/Data2;yes;no"'
+                stdin_open: true
+                tty: true
+                ports:
+                        - 139:139
+                        - 445:445
+                volumes:
+                        - /mnt/Storage0:/media/Data0
+                        - /mnt/Storage1:/media/Data1
+                        - /mnt/Storage2:/media/Data2
+        timemachine:
+                image: dubodubonduponey/netatalk:v1
+                restart: unless-stopped
+                volumes:
+                    - /mnt/Storage2/Disk_Time/:/media/timemachine
+                environment:
+                    - USERS=yasser
+                    - PASSWORDS=*1ion.vale
+                    - NAME=Disk_Time02
+                    - AVAHI_NAME=Disk_Time02
+                cap_add:
+                    - NET_BIND_SERVICE
+                    - CHOWN
+                    - FOWNER
+                    - SETUID
+                    - SETGID
+                    - DAC_OVERRIDE
+                cap_drop:
+                    - ALL
+                network_mode: host

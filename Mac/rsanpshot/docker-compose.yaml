@@ -1,0 +1,14 @@
+version: "3"
+services:
+    rsync:
+        image: blacklabelops/jenkins
+        #image: pablokbs/rsnapshot-cron
+        restart: unless-stopped
+        volumes:
+            - /Volumes/media/Back_MAc:/origen:ro
+            - /Volumes/Data2/Test:/destino
+        environment:
+            - BACKUP_DIRECTORIES=/origen    destino/
+            - CRON_DAILY= * * 1 * * *
+            - CRON_WEEKLY= * * * * * *
+            - CRON_MONTHLY= * * * * * *

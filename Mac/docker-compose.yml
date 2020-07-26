@@ -5,8 +5,10 @@ services:
     networks:
       - back
     volumes:
-      - /Users/yasser/Documents/Web/www/:/var/www/html/
+      - /Users/yasser/Documents/Web/www/:/usr/share/nginx/html
     container_name: php_cont
+  #web:
+    #image: nginx
   apache:
     build: './Apache/'
     depends_on:
@@ -18,7 +20,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /Users/yasser/Documents/Web/www/:/var/www/html/
+      - /Users/yasser/Documents/Web/www/:/usr/share/nginx/html
     container_name: apache_cont
   database:
     image: mariadb
